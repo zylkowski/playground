@@ -1,0 +1,10 @@
+[package]
+name = "playground_2"
+version = "0.1.0"
+authors = ["zylkowski_a <arkadiuszzylkowski@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+enum_dispatch = "0.3.7"
