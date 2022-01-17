@@ -1,31 +1,35 @@
+use std::collections::HashMap;
+
 // UI FILE
 // use enum_dispatch::enum_dispatch;
 use playground_2::*;
+use strum::IntoEnumIterator;
 
-// #[enum_dispatch(Stage)]
-pub trait Draw {
-    fn draw(&self);
+pub struct Painter;
+pub struct LabStageState {
+    is_animated: bool,
+    painter: Painter,
+    //etc
 }
 
-impl Draw for Stage {
-    fn draw(&self) {
-        match self {
-            Stage::StageA(_) => todo!(),
-            Stage::StageB(_) => todo!(),
+pub struct LabPipeline {
+    pub pipeline_states: HashMap<Pipeline, LabStageState>,
+}
+
+impl LabPipeline {
+    pub fn new() -> LabPipeline {
+        Self {
+            pipeline_states: playground_2::Pipeline::iter()
+                .map(|stage| (stage, Self::lab_stage_state(&stage)))
+                .collect(),
         }
     }
-}
 
-#[cfg(test)]
-mod tests {
-    // use playground_2::*;
-
-    // use crate::*;
-
-    #[test]
-    fn it_works() {
-        // let a: Stage = StageA {}.into();
-
-        // a.draw();
+    pub fn lab_stage_state(stage: &Pipeline) -> LabStageState {
+        match stage {
+            Pipeline::Processing => todo!(),
+            Pipeline::Footprint => todo!(),
+            Pipeline::Etc => todo!(),
+        }
     }
 }

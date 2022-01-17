@@ -1,40 +1,46 @@
+pub use strum::EnumIter;
+use strum::IntoEnumIterator;
+
 // BASE FILE
-use enum_dispatch::enum_dispatch;
 
-pub struct StageA;
-pub struct StageB;
+pub struct Layout;
 
-#[enum_dispatch]
-pub enum Stage {
-    StageA,
-    StageB,
+#[derive(EnumIter, PartialEq, Eq, Hash, Clone, Copy)]
+pub enum Pipeline {
+    Processing,
+    Footprint,
+    Etc,
 }
 
-#[enum_dispatch(Stage)]
-pub trait Run {
-    fn run(&self);
+pub enum StageResult {
+    Running,
+    Converged,
 }
 
-impl Run for StageA {
-    fn run(&self) {
-        print!("Stage A run");
+impl Pipeline {
+    pub fn step_functions(&self, layout: &mut Layout) -> StageResult {
+        match self {
+            Pipeline::Processing => processing_fun(layout),
+            Pipeline::Footprint => footprint_fun(layout),
+            Pipeline::Etc => etc_fun(layout),
+        }
+    }
+
+    pub fn run(layout: &mut Layout) {
+        for stage in Self::iter() {
+            while let StageResult::Running = stage.step_functions(layout) {}
+        }
     }
 }
 
-impl Run for StageB {
-    fn run(&self) {
-        print!("Stage B run");
-    }
+pub fn processing_fun(_input: &mut Layout) -> StageResult {
+    todo!()
 }
 
-#[cfg(test)]
-mod tests {
-    // use crate::*;
+pub fn footprint_fun(_input: &mut Layout) -> StageResult {
+    todo!()
+}
 
-    #[test]
-    fn it_works() {
-        // let a: Stage = StageA {}.into();
-
-        // a.run();
-    }
+pub fn etc_fun(_input: &mut Layout) -> StageResult {
+    todo!()
 }
