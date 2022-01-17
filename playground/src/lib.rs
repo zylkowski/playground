@@ -27,7 +27,10 @@ impl LabPipeline {
 
     pub fn lab_stage_state(stage: &Pipeline) -> LabStageState {
         match stage {
-            Pipeline::Processing => todo!(),
+            Pipeline::Processing => LabStageState {
+                is_animated: false,
+                painter: Painter,
+            },
             Pipeline::Footprint => todo!(),
             Pipeline::Etc => todo!(),
         }
