@@ -30,6 +30,7 @@ impl LabPipeline {
 
     pub fn lab_stage_state(stage: &Pipeline) -> LabStageState {
         match stage {
+            //Write LabStageState only for stages that are not default
             Pipeline::Etc => LabStageState {
                 is_animated: false,
                 painter: Painter,
