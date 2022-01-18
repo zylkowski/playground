@@ -5,7 +5,10 @@ use std::collections::HashMap;
 use playground_2::*;
 use strum::IntoEnumIterator;
 
+#[derive(Default)]
 pub struct Painter;
+
+#[derive(Default)]
 pub struct LabStageState {
     is_animated: bool,
     painter: Painter,
@@ -27,12 +30,11 @@ impl LabPipeline {
 
     pub fn lab_stage_state(stage: &Pipeline) -> LabStageState {
         match stage {
-            Pipeline::Processing => LabStageState {
+            Pipeline::Etc => LabStageState {
                 is_animated: false,
                 painter: Painter,
             },
-            Pipeline::Footprint => todo!(),
-            Pipeline::Etc => todo!(),
+            _ => Default::default(),
         }
     }
 }
